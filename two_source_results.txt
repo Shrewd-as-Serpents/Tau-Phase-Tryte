@@ -1,0 +1,28 @@
+PART 1  bit accounting  (payload W bits; trits stored as 2 physical bits, or packed)
+    W  SEC-DED alone  two-source phys  two-source packed  x payload  guaranteed
+    7         12 bits           27 bits             24 bits      3.86x  fixes 2, never silent at 3
+   16         22 bits           51 bits             45 bits      3.19x  fixes 2, never silent at 3
+   32         39 bits           88 bits             78 bits      2.75x  fixes 2, never silent at 3
+  the second source is a full second copy of the value, so it costs about 2x payload at ANY width;
+  only the check bits shrink with width
+
+PART 2  plain binary code with the same physical bits (distance found by search; a lower bound on what exists)
+    W  bits  two-source d  binary-only d found  binary-only corrects / never silent
+    7    27             6                   10  4 / 5
+   16    51             6                   13  6 / 6
+
+PART 3  one whole source wiped (width 16); the other source keeps f random faults
+  policy: strict (joint distance 2)
+    binary source wiped    f=0: trapped 100.0%
+    binary source wiped    f=1: trapped 100.0%
+    binary source wiped    f=2: trapped 100.0%
+    ternary source wiped   f=0: trapped 100.0%
+    ternary source wiped   f=1: trapped 100.0%
+    ternary source wiped   f=2: trapped 100.0%
+  policy: trust a clean source alone (degraded)
+    binary source wiped    f=0: right  96.8%, trapped   3.2%
+    binary source wiped    f=1: SILENT_WRONG   2.7%, trapped  97.3%
+    binary source wiped    f=2: SILENT_WRONG   3.0%, trapped  97.0%
+    ternary source wiped   f=0: right 100.0%
+    ternary source wiped   f=1: trapped 100.0%
+    ternary source wiped   f=2: trapped 100.0%

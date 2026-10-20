@@ -1,0 +1,107 @@
+smallest modulus separating all 20 ternary single-trit faults: 22
+
+SINGLE-FAULT LOCATABILITY (distinct syndromes / faults to tell apart)
+  mod 19         binary bit flips: 16/16   ternary trit faults: 14/20
+  mod 20 (4x5)   binary bit flips:  8/16   ternary trit faults: 12/20
+  mod 28 (7x4)   binary bit flips: 10/16   ternary trit faults: 12/20
+  mod 30 (5x6)   binary bit flips: 10/16   ternary trit faults: 12/20
+  mod 22         binary bit flips: 12/16   ternary trit faults: 20/20
+
+STORAGE AND GUARANTEES (from minimum distance of the 128 legal rows)
+  scheme                           cells info bits d_min  detects  corrects
+  raw binary (7b)                      7       7.0     1        0         0
+  raw ternary (5t)                     5       7.9     1        0         0
+  binary x ternary raw (7b+5t)        12      14.9     2        1         0
+  CRT540 bits+tryte (5b+3t)            8       9.8     1        0         0
+  CRT540 base20+tryte (1x20+3t)        4       9.1     1        0         0
+  A19  bin+mod19+SECDED               19      19.0     4        3         1
+  A30  bin+CRT(5,6)+par               21      21.0     2        1         0
+  A28  bin+CRT(7,4)+par               19      19.0     2        1         0
+  B    ter+check+trit-par             12      19.0     3        2         1
+  A19 + B joint decode                31      38.0     7        6         3
+
+OUTCOMES for k simultaneous cell faults  (right / trapped / SILENT WRONG, %)
+  decoder: unique nearest codeword within t cells, else trap
+
+  k = 1
+    raw binary (7b)                     0.0 /    0.0 / 100.00   [exhaustive, n=896]
+    raw ternary (5t)                    0.0 /   18.4 /  81.56   [exhaustive, n=1280]
+    binary x ternary raw (7b+5t)        0.0 /  100.0 /   0.00   [exhaustive, n=2176]
+    CRT540 bits+tryte (5b+3t)           0.0 /   87.5 /  12.50   [exhaustive, n=1408]
+    CRT540 base20+tryte (1x20+3t)       0.0 /   81.4 /  18.62   [exhaustive, n=3200]
+    A19  bin+mod19+SECDED             100.0 /    0.0 /   0.00   [exhaustive, n=2432]
+    A30  bin+CRT(5,6)+par               0.0 /  100.0 /   0.00   [exhaustive, n=2688]
+    A28  bin+CRT(7,4)+par               0.0 /  100.0 /   0.00   [exhaustive, n=2432]
+    B    ter+check+trit-par           100.0 /    0.0 /   0.00   [exhaustive, n=3072]
+    A19 + B joint decode              100.0 /    0.0 /   0.00   [exhaustive, n=5504]
+
+  k = 2
+    raw binary (7b)                     0.0 /    0.0 / 100.00   [exhaustive, n=2688]
+    raw ternary (5t)                    0.0 /   32.9 /  67.11   [exhaustive, n=5120]
+    binary x ternary raw (7b+5t)        0.0 /   99.2 /   0.76   [exhaustive, n=16768]
+    CRT540 bits+tryte (5b+3t)           0.0 /   81.2 /  18.84   [exhaustive, n=6656]
+    CRT540 base20+tryte (1x20+3t)       0.0 /   76.3 /  23.74   [exhaustive, n=16128]
+    A19  bin+mod19+SECDED               0.0 /  100.0 /   0.00   [exhaustive, n=21888]
+    A30  bin+CRT(5,6)+par               0.0 /   99.5 /   0.48   [exhaustive, n=26880]
+    A28  bin+CRT(7,4)+par               0.0 /   99.4 /   0.58   [exhaustive, n=21888]
+    B    ter+check+trit-par             0.0 /   95.7 /   4.33   [exhaustive, n=33792]
+    A19 + B joint decode              100.0 /    0.0 /   0.00   [exhaustive, n=114048]
+
+  k = 3
+    raw binary (7b)                     0.0 /    0.0 / 100.00   [exhaustive, n=4480]
+    raw ternary (5t)                    0.0 /   44.8 /  55.16   [exhaustive, n=10240]
+    binary x ternary raw (7b+5t)        0.0 /   99.4 /   0.63   [exhaustive, n=77440]
+    CRT540 bits+tryte (5b+3t)           0.0 /   81.5 /  18.53   [exhaustive, n=17664]
+    CRT540 base20+tryte (1x20+3t)       0.0 /   75.9 /  24.13   [exhaustive, n=30208]
+    A19  bin+mod19+SECDED               0.0 /   95.6 /   4.40   [exhaustive, n=124032]
+    A30  bin+CRT(5,6)+par               0.0 /  100.0 /   0.00   [exhaustive, n=170240]
+    A28  bin+CRT(7,4)+par               0.0 /  100.0 /   0.00   [exhaustive, n=124032]
+    B    ter+check+trit-par             0.0 /   98.4 /   1.59   [exhaustive, n=225280]
+    A19 + B joint decode              100.0 /    0.0 /   0.00   [sampled, n=60000]
+
+  k = 4
+    raw binary (7b)                     0.0 /    0.0 / 100.00   [exhaustive, n=4480]
+    raw ternary (5t)                    0.0 /   54.8 /  45.16   [exhaustive, n=10240]
+    binary x ternary raw (7b+5t)        0.0 /   99.5 /   0.55   [exhaustive, n=238720]
+    CRT540 bits+tryte (5b+3t)           0.0 /   84.4 /  15.65   [exhaustive, n=28800]
+    CRT540 base20+tryte (1x20+3t)       0.0 /   76.6 /  23.36   [exhaustive, n=19456]
+    A19  bin+mod19+SECDED               0.0 /   99.7 /   0.27   [exhaustive, n=496128]
+    A30  bin+CRT(5,6)+par               0.0 /   99.9 /   0.10   [sampled, n=60000]
+    A28  bin+CRT(7,4)+par               0.0 /   99.7 /   0.26   [exhaustive, n=496128]
+    B    ter+check+trit-par             0.0 /   98.3 /   1.70   [sampled, n=60000]
+    A19 + B joint decode                0.0 /  100.0 /   0.02   [sampled, n=60000]
+
+TWO INDEPENDENT SOURCES, each decoded alone, then arbitrated
+
+  k = 1  [exhaustive, n=5504]
+    A alone                                       100.0 /    0.0 /   0.00
+    B alone                                       100.0 /    0.0 /   0.00
+    arbitrated, lenient (one good source wins)    100.0 /    0.0 /   0.00
+    arbitrated, strict  (both must agree)         100.0 /    0.0 /   0.00
+    both sources wrong AND identical (the true common-mode hole): 0
+
+  k = 2  [exhaustive, n=114048]
+    A alone                                        80.8 /   19.2 /   0.00
+    B alone                                        70.4 /   28.3 /   1.28
+    arbitrated, lenient (one good source wins)     98.7 /    1.3 /   0.00
+    arbitrated, strict  (both must agree)          51.2 /   48.8 /   0.00
+    B silent-wrong cases:   1464 -> after lenient arbitration silent      0, trapped   1464, right      0
+    both sources wrong AND identical (the true common-mode hole): 0
+
+  k = 3  [sampled, n=120000]
+    A alone                                        32.8 /   66.2 /   0.99
+    B alone                                        67.2 /   31.5 /   1.27
+    arbitrated, lenient (one good source wins)     97.7 /    2.3 /   0.00
+    arbitrated, strict  (both must agree)           0.0 /  100.0 /   0.00
+    A silent-wrong cases:   1189 -> after lenient arbitration silent      0, trapped   1189, right      0
+    B silent-wrong cases:   1524 -> after lenient arbitration silent      0, trapped   1524, right      0
+    both sources wrong AND identical (the true common-mode hole): 0
+
+  k = 4  [sampled, n=120000]
+    A alone                                        14.9 /   83.3 /   1.74
+    B alone                                        49.2 /   49.0 /   1.83
+    arbitrated, lenient (one good source wins)     62.1 /   36.3 /   1.58
+    arbitrated, strict  (both must agree)           0.0 /  100.0 /   0.00
+    A silent-wrong cases:   2083 -> after lenient arbitration silent      0, trapped   2083, right      0
+    B silent-wrong cases:   2196 -> after lenient arbitration silent   1895, trapped    301, right      0
+    both sources wrong AND identical (the true common-mode hole): 0
