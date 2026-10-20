@@ -666,5 +666,3 @@ Storage redundancy cannot catch a wrong value the engine computes and then store
 ## Status
 
 A work in progress. Section 11 of the spec lists the open design decisions.
-#   d i s c i p l i n e d - t r i t - c l o c k  
- 
