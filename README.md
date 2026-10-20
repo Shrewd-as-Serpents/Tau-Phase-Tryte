@@ -6,8 +6,6 @@ This repository holds the written design, a Python reference suite that checks i
 
 ## What is in here
 
-Everything lives in the `tau-phase-tryte/` folder.
-
 | File | What it is |
 | --- | --- |
 | `Tau-Phase Engine Design Specification v5 (2).md` | The full design: tryte and hex projection, world register, master ring, phase and circular stability, orbit layer, error syndromes, color compiler, player levers, per-turn pipeline, open decisions, and Appendix A on guarded registers |
