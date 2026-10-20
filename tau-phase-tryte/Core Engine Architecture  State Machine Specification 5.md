@@ -84,16 +84,26 @@ $$\Delta\theta(x) = \left(\theta_{20}(x) - \theta_{27}(x)\right) \bmod \tau = \l
 ### B. Mardia Circular Standard Deviation ($\sigma_{\text{rotations}}$) & Deterministic LUTs
 Over a rolling history window of **$n = 3$ committed decisive states** $\{x_1, x_2, x_3\}$, the engine measures state dispersion using Mardia's circular standard deviation:
 $$
-\forall\, i,j \in \{1,2,3\},\ i \ne j,\quad
+C = \frac{1}{n}\sum_{i=1}^{n} \cos\left(\frac{\tau \cdot x_i}{M}\right),
+\quad
+S = \frac{1}{n}\sum_{i=1}^{n} \sin\left(\frac{\tau \cdot x_i}{M}\right)
+$$
+
+$$
+R = \min\left(1.0, \sqrt{C^2 + S^2}\right),
+\quad
+\sigma_{\text{rotations}} = \frac{\sqrt{-2\ln(R)}}{\tau}
+$$
+*   **Deterministic Fixed-Point LUT Stride & Clamping:** Indices are precomputed via signed 16-bit integer tables (`COS_LUT`, `SIN_LUT` scaled by $2^{14}$). $R$ is strictly clamped to $[0.000001, 1.0]$ before evaluating $\ln(R)$ to prevent domain errors.
+*   **Order-Independent Combinatorial Singularity:**
+    $$
+\forall\, i,j \in \lbrace 1,2,3\rbrace,\ i \ne j,\quad
 (x_i-x_j)\bmod M
 \in \left\lbrace \frac{M}{3},\,\frac{2M}{3}\right\rbrace
 \quad \text{OR} \quad
 C_{\text{sum}}^2 + S_{\text{sum}}^2 < \epsilon_{\text{int}}
 \quad (\epsilon_{\text{int}}=64)
 $$
-*   **Deterministic Fixed-Point LUT Stride & Clamping:** Indices are precomputed via signed 16-bit integer tables (`COS_LUT`, `SIN_LUT` scaled by $2^{14}$). $R$ is strictly clamped to $[0.000001, 1.0]$ before evaluating $\ln(R)$ to prevent domain errors.
-*   **Order-Independent Combinatorial Singularity:**
-    $$\forall i \neq j \in \{1,2,3\},\quad (x_i - x_j) \bmod M \in \left\{\frac{M}{3},\; \frac{2M}{3}\right\} \quad \text{OR} \quad C_{\text{sum}}^2 + S_{\text{sum}}^2 < \epsilon_{\text{int}} \quad (\epsilon_{\text{int}} = 64)$$
     When satisfied, the engine triggers a deterministic **Symmetry-Break Singularity**.
 
 ---
